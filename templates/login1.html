@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>效果评估平台</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="dashboard.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../static/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+ <meta http-equiv="Content Type" content="text/html" charset="utf-8" />
+        <style>
+               #container{
+                   margin-left: 20%;
+                   width:50%;
+                   margin-top: 20%;
+                   box-shadow: 101px 101px 51px #ffffff;
+               }
+               #content{
+                   text-align: center;
+               }
+               input[type="text"] { width:200px; height:20px}
+               input[type="submit"] {border-radius:25px; font-size:20px; width:200px; height:30px}
+
+        </style>
+  </head>
+
+  <body>
+
+
+<nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">数据智能－效果评估平台</a>
+        </div>
+
+        <div id="navbar" class="navbar-collapse collapse">
+	 <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">login</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="/speed">切换账号</a></li>
+          </ul>
+        </li>
+      </ul>
+          <!--<ul class="nav navbar-nav navbar-right">
+		<a href="#" class="navbar-link">login</a> <a href="/speed" class="navbar-link">切换账号</a>
+          </ul>-->
+          <form class="navbar-form navbar-right">
+ <!--           <input type="text" class="form-control" placeholder="Search...">-->
+          </form>
+        </div>
+      </div>
+    </nav>
+
+
+
+
+
+<ul class="nav nav-pills">
+  <li role="presentation"><a href="/login">效果评估</a></li>
+  <li role="presentation" class="active"><a href="/double">效果比对</a></li>
+  <li role="presentation"><a href="/historytotal/{{username}}">历史纪录</a></li>
+  <li role="presentation"><a href="/diff/{{username}}">diff工具</a></li>
+  <li role="presentation"><a href="/diffpress/{{username}}">diff性能工具</a></li>
+</ul>
+
+        <div class="col-sm-10 col-sm-offset-1 col-md-12 col-md-offset-0 main">
+
+
+
+<div style="height:600;width:600">
+                <CENTER>
+            <form action="" method="post" class="form-inline">
+		 <h2 class="page-header">启动(请添加并只选择一种添加方式，未添加具体路径前请勿点击启动键)</h2>
+		<p>
+			<th align="right">测试组IP:</th>
+			<th><input type=text class="form-control" name=ipone></th>
+			<th align="right">PORT:</th>
+			<th><input type=text class="form-control" name=portone></th>
+			<th align="right">tests:</th>
+			<th><input type=text class="form-control" name=testsone></th>
+			<th align="right">poster_num:</th>
+			<th><input type=text class="form-control" name=page_num_one></th>
+			<th align="right">sort</th><th><input type=text class="form-control" name=sort_one  value="weight"></th>
+		</p>	
+
+                <p>
+                      <th align="right">对照组IP:</th><th><input type=text class="form-control" name=IP  value="goodslist-bj.meiliworks.com"></th>
+                      <th align="right">PORT:</th><th><input type=text class="form-control" name=PORT  value="80" ></th>
+		      <th align="right">tests:</th><th><input type=text class="form-control" name=tests  value="poster_ranking_1"></th>
+		      <th align="right">poster_num:</th><th><input type=text class="form-control" name=page_num  value="100"></th>
+		      <th align="right">sort:</th><th><input type=text class="form-control" name=sort  value="weight"></th>
+                </p>
+			<p><button id="base-btn" class="btn btn-primary submit" type="submit" onclick="$(this).text('启动中...');if(ajaxRequest('phpreloadform', '/server/php        _reload/ip/10.8.249.19')) $(this).text('一键启动');">一键启动</button>点击一键启动后，不要手工刷新页面，请不要重复点击上面的一键启动,等待启动完成
+
+		 <h2 class="page-header">OR</h2>
+
+		 <p>
+                        <th align="right">gemini svn地址：</th>
+                        <th><input type=text name=gemini class="form-control" size="30"></th>
+                        <th align="right">gemini1 svn地址：</th>
+                        <th><input type=text name=gemini1 class="form-control" size="30"></th>
+		</p>
+                        <p><button id="base-btn" class="btn btn-primary submit" type="submit" onclick="$(this).text('启动中...');if(ajaxRequest('phpreloadform', '/server/php_reload/ip/10.8.249.19')) $(this).text('一键启动');">一键启动</button>[<a href="/doublelog/{{timecode}}" target="_blank">日志</a>] 点击一键启动后，不要手工刷新页面，请不要重复点击下面的一键启动,等待启动完成
+
+           </form>
+                  </CENTER>
+          </div>
+	
+	
+	<div class="alert alert-warning alert-danger" role="alert">
+  	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  	<strong>Warning!</strong> 填写IP和PORT 的格式请严格按照默认值格式进行填写<br>
+	<strong>Warning!</strong>每次选择只能选取相应的模式进行启动，请勿选择多种模式启动<br>
+	<strong>Warning!</strong>每次部署新环境请在相应的模块添加相应的svn地址<br>
+	<strong>Warning!</strong>添加完svn地址后点击一键启动按钮，点击之后请不要刷新页面，等待环境部署完成并出现结果页面<br>
+	<strong>Warning!</strong>如遇到问题请联系开发人员郭洪明 qq:572102363 或魏建豪 qq:903228577 或直接在speed中查找<br>
+	</div>
+
+
+<!--	 <div class="alert alert-error">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+		<font color="red"> 填写IP和PORT 的格式请严格按照默认值格式进行填写 </font><br>
+		<font color="red">每次选择只能选取相应的模式进行启动，请勿选择多种模式启动</font><br>
+                每次部署新环境请在相应的模块添加相应的svn地址<br>
+                <font color="red">添加完svn地址后点击一键启动按钮，点击之后请不要刷新页面，等待环境部署完成并出现结果页面</font><br>
+                暂时只支持十二位同事同时使用部署环境，如多人使用需要等待，麻烦排队等候，页面下方已列出使用人以及空闲机器数量<br>
+                如遇到问题请联系开发人员郭洪明 qq:572102363 或魏建豪 qq:903228577 或直接在speed中查找
+         </div>
+-->
+
+<!--         <h2 class="sub-header">运行日志</h2>
+        <iframe name="guanggao" onload="guanggao.scrollBy(0,999999)" id="guanggao" src="/doublelog/{{timecode}}" width="100%" height="200" marginwidth="0" marginheight="0" allowtransparency="yes" frameborder="no">
+        <script type="text/javascript"></script>
+        </iframe>
+
+
+
+          <h2 class="sub-header">运行中</h2>
+		<iframe name="guanggao" onload="guanggao.scrollBy(0,999999)" id="guanggao" src="/people/{{username}}" width="100%" height="200" marginwidth="0" marginheight="0" allowtransparency="yes" frameborder="no">
+        <script type="text/javascript"></script>
+        </iframe>
+-->
+	
+
+
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <script src="../../assets/js/vendor/holder.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>
+
